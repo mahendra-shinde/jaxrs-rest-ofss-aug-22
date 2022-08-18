@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>Customer Report</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function () {
+			$("#btn1").click(
+				function () {
+					var settings = {
+						"url": "http://localhost:8000/demo1/customer/",
+						"method": "GET",
+						"timeout": 0,
+						"headers": {
+							"Accept": "application/json"
+						},
+					};
+
+					$.ajax(settings).done(function (response) {
+						var row = "";
+						
+						for(i=0;i<response.length;i++){
+							row += "<tr><td>"+response[i].custId+"</td>";
+							row += "<td>"+response[i].firstName+"</td>";
+							row += "<td>"+response[i].lastName+"</td>";
+							row += "<td>"+response[i].phone+"</td></tr>";
+						}	
+						$("#data-table").empty().append(row);
+					});
+				}
+			);
+		});
+	</script>
+</head>
+
+<body>
+	<table>
+		<input type="button" value="Load Data" id="btn1" />
+		<thead>
+			<tr>
+				<td>Cust Id</td>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Contact </td>
+			</tr>
+		</thead>
+		<tbody id="data-table">
+
+		</tbody>
+	</table>
+</body>
+
+</html>
