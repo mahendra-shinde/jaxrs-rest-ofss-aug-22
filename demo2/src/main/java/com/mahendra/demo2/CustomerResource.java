@@ -2,6 +2,8 @@ package com.mahendra.demo2;
 
 import java.util.Map;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
@@ -11,12 +13,14 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 @Path("/customer")
+@Api(value = "Customer resource")
 public class CustomerResource {
 	
 	private CustomerService service = CustomerService.getInstance();
 	
 	@GET
 	@Produces("application/json")
+	@ApiOperation(value = "Get all the customers")
 	public Customer[] getAll() {
 		return service.getAll();
 	}
